@@ -21,6 +21,15 @@
   - 建立值物件的單元測試
   - _需求: 1.1, 4.1_
 
+- [ ] 2.3 建立 Mapper 轉換層介面
+  - 定義通用 DomainMapper 介面
+  - 定義 PromotionQueryMapper 介面
+  - 定義 RuleConfigurationMapper 介面
+  - 定義 CustomerMapper 介面
+  - 建立 MapperValidator 驗證機制
+  - 建立 Mapper 介面的單元測試
+  - _需求: 所有需求 (架構邊界保護)_
+
 - [ ] 3. 實作命令模式的判斷因子
 - [ ] 3.1 建立判斷因子基礎架構
   - 實作 AbstractJudgmentFactor 抽象類別
@@ -91,11 +100,21 @@
   - 建立儲存庫的單元測試，使用橋接模式支援 H2/PostgreSQL
   - _需求: 2.1, 3.1, 3.3_
 
-- [ ] 7.2 實作資料存取服務
-  - 實作資料存取的異常處理機制
+- [ ] 7.2 實作 Mapper 轉換層實作
+  - 實作 PromotionQueryMapperImpl
+  - 實作 RuleConfigurationMapperImpl
+  - 實作 CustomerMapperImpl
+  - 建立邊界驗證機制，確保外層物件不進入核心層
+  - 實作 JSON 序列化/反序列化工具 (純 Java，無框架依賴)
+  - 建立 Mapper 的單元測試，包含邊界驗證測試
+  - _需求: 所有需求 (架構邊界保護)_
+
+- [ ] 7.3 實作資料存取服務
+  - 實作 JpaRuleConfigurationRepository，嚴格使用 Mapper 轉換
+  - 實作 JpaCustomerRepository，嚴格使用 Mapper 轉換
   - 建立資料庫連線的健康檢查
   - 實作資料存取的效能監控
-  - 建立資料存取層的整合測試
+  - 建立資料存取層的整合測試，驗證 Mapper 轉換正確性
   - _需求: 5.5, 6.3_
 
 - [ ] 8. 實作應用層服務
@@ -122,10 +141,11 @@
 
 - [ ] 9. 建立 REST API 控制器
 - [ ] 9.1 實作優惠查詢 API
-  - 建立 PromotionQueryController
+  - 建立 PromotionQueryController，嚴格使用 Mapper 轉換
   - 實作 OpenAPI 註解和文件
   - 建立 API 的輸入驗證和錯誤處理
   - 實作 API 的限流和安全機制
+  - 建立邊界驗證測試，確保 DTO 不直接進入核心層
   - 建立 API 的整合測試，包含正反向測試案例
   - _需求: 1.1, 1.4, 5.1, 5.2_
 
